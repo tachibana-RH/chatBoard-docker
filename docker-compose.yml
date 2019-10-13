@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
+    environment:
+      TZ: "Asia/Tokyo"
+    depends_on:
+      - mysql
+    ports:
+      - '49443:3000'
+    tty: true
+    volumes:
+      - ./node/src:/usr/node/src
+      - ./node/mount/certs/:/etc/pki/certs
+    container_name: app
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxxxx
+      MYSQL_USER: xxxxxx
+      MYSQL_PASSWORD: xxxxxxxxx
+      MYSQL_DATABASE: xxxxxxxxx
+      TZ: "Asia/Tokyo"
+    command: bash -c 'usermod -o -u 1000 mysql; groupmod -o -g 500 mysql; chown -R mysql:root /var/run/mysqld/; /entrypoint.sh mysqld --user=mysql --console'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql/db_data/mysql:/var/lib/mysql
+      - ./mysql/setup:/docker-entrypoint-initdb.d
+    container_name: mysql
+
