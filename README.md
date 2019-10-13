@@ -1,2 +1,2 @@
 # chatBoard-docker
-チャットボードのデプロイで使用したDockerfile
+chatBoardで使用したインフラ用のDockerfileです。
