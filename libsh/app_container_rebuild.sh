@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/ryo/chatboard 
+cd /home/username/chatboard 
 
 #コンテナが立ち上がっていた場合は落とす
 if test $(docker ps | wc -l) = 1; then
