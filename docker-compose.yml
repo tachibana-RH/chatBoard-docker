@@ -14,7 +14,7 @@ services:
     tty: true
     volumes:
       - ./node/src:/usr/node/src
-      - ./node/mount/certs/:/etc/pki/certs
+      - ./node/mount/certs/:/etc/xxx/certs
     container_name: app
 
   mysql:
